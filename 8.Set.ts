@@ -1,7 +1,7 @@
 class NSet{
     dataSource: any[] = [];
     add(data){
-        if (this.dataSource.indexOf(data) < 0) {
+        if (this.dataSource.indexOf(data) < 0 && typeof data != 'undefined' && data !== null) {
             this.dataSource.push(data);
             return true;
         }
@@ -9,7 +9,7 @@ class NSet{
     }
     remove(data){
         const pos = this.dataSource.indexOf(data);
-        if (pos > 0) {
+        if (-1 !== pos) {
             this.dataSource.splice(pos, 1);
             return true;
         }
@@ -19,7 +19,7 @@ class NSet{
         return this.dataSource;
     }
     contains(data){
-        return Boolean(this.dataSource.find(v => v === data));
+        return Boolean(-1 !== this.dataSource.find(v => v === data));
     }
     union(set: NSet) {
         let tempSet = new NSet();
